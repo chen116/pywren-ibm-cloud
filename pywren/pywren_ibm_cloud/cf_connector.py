@@ -50,7 +50,7 @@ class CloudFunctions:
         adapter = requests.adapters.HTTPAdapter()
         self.session.mount('https://', adapter)
 
-        msg = 'IBM Cloud Functions init for'
+        msg = 'IBMmeow Cloud Functions init for'
         logger.info('{} namespace: {} host {}'.format(msg, self.namespace, self.endpoint))
         if(logger.getEffectiveLevel() == logging.DEBUG):
             print("{} namespace: {} and host: {}".format(msg, self.namespace,
