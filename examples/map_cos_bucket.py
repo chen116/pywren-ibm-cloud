@@ -21,7 +21,7 @@ from where you can access to the partial results.
 
 import pywren_ibm_cloud as pywren
 
-bucketname = 'pw-sample-data'
+bucketname = 'vicpywren'
 
 
 def my_map_function(bucket, key, data_stream):
