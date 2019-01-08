@@ -17,4 +17,4 @@ def my_map_function(x):
 
 pw = pywren.ibm_cf_executor()
 pw.map(my_map_function, iterdata)
-print(pw.get_result())
+# print(pw.get_result())
