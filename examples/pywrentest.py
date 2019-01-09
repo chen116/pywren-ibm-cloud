@@ -9,6 +9,6 @@ def my_function(x):
 
 if __name__ == '__main__':
     pw = pywren.ibm_cf_executor(log_level='DEBUG')
-    print(pw.executor.invoker.is_cf_cluster)
+    print(pw.executor.invoker.client.is_cf_cluster)
     # pw.call_async(my_function, 3)
     # print (pw.get_result())
