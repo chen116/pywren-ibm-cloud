@@ -29,9 +29,9 @@ from where you can access to the partial results.
 
 import pywren_ibm_cloud as pywren
 
-iterdata = ['pw-sample-data/obj1.txt',
-            'pw-sample-data/obj2.txt',
-            'pw-sample-data/obj3.txt']
+iterdata = ['vicpywren/meow1',
+            'vicpywren/meow2',
+            'vicpywren/meow3']
 
 
 def my_map_function(key, data_stream):
