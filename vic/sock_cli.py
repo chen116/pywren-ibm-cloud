@@ -10,5 +10,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 	while i!='q':
 		# s.sendall(i.encode())
 		data = s.recv(1024)
-		print('Received', s.recv(1024))
+		if data:
+			print('Received', s.recv(1024))
+		else:
+			break
 		# i=input()
