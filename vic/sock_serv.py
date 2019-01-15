@@ -12,9 +12,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with conn:
         print('Connected by', addr)
         while True:
-            time.sleep(1)
             # data = conn.recv(1024)
-            if not data:
-                break
+            # if not data:
+                # break
             conn.sendall(str(i).encode())
             i+=1
+            time.sleep(100)
