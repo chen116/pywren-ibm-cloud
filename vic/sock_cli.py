@@ -7,7 +7,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 	i=input()
 	s.connect((HOST, PORT))
 	while i!='q':
-		s.sendall(b'Hello, world')
+		s.sendall(i.encode())
 		data = s.recv(1024)
 		print('Received', repr(data))
 		i=input()
