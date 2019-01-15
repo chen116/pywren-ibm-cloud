@@ -6,8 +6,8 @@ PORT = 65432        # The port used by the server
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 	i=input()
 	s.connect((HOST, PORT))
-		while i!='q':
-			s.sendall(b'Hello, world')
-			data = s.recv(1024)
-			print('Received', repr(data))
-			i=input()
+	while i!='q':
+		s.sendall(b'Hello, world')
+		data = s.recv(1024)
+		print('Received', repr(data))
+		i=input()
