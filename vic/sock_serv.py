@@ -17,4 +17,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 # break
             conn.sendall(str(i).encode())
             i+=1
-            time.sleep(100)
+            time.sleep(1)
