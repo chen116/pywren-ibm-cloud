@@ -79,7 +79,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
         print('closed')
     for t in threads:
         t.join()
-    # print(pw.get_result())
+    print(pw.get_result())
 
 
 #================== no thread ================
