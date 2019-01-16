@@ -8,6 +8,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((HOST, PORT))
     s.listen()
+    print("server listening")
     conn, addr = s.accept()
     with conn:
         print("Connected by", addr)
@@ -16,7 +17,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # if not data:
             #     break
         for i in range(15):
-            conn.sendall(str(i).encode())
+            conn.sendall(str(0).encode())
             time.sleep(0.5)
     print('closing')
     s.close()
