@@ -2,7 +2,7 @@
 Simple PyWren example using one single function invocation
 """
 import pywren_ibm_cloud as pywren
-import socket,fcntl,os
+import socket,fcntl,os,errno
 import time
 HOST = "127.0.0.1"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
