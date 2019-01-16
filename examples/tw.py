@@ -19,7 +19,7 @@ import threading
 
 
 def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhost',port=65432,window=2):
-    exitFlag = 1
+    exitFlag = 0
     cnt=0
     class myThread (threading.Thread):
         def __init__(self, threadID, name, q):
@@ -30,7 +30,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             self.cnt = 0
         def run(self):
             print("Starting " + self.name)
-            while exitFlag:
+            while not exitFlag:
                 queueLock.acquire()
                 if not workQueue.empty():
                     self.cnt+=1
@@ -77,7 +77,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 self.time=time.time()
                 print("=========================",self.cnt)
             if self.cnt>=4:
-                sys.exit('Limit of '+str(self.max_tweets)+' tweets reached.')
+                sys.exit('Limit tweets reached.')
 
             return(True)
 
