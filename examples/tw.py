@@ -115,8 +115,9 @@ auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
 twitterStream = Stream(auth, listener())
-twitterStream.filter(track=["car"])
 hi(twitterStream)
+
+twitterStream.filter(track=["car"])
 
 
 ####################just tweepy stream#######3
