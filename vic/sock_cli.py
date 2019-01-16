@@ -25,7 +25,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             
             if data:
                 print("Received:", repr(data))
-                batch+=[int(data.decode())]
+                batch+=[(data.decode())]
             else:
                 print('meow')
                 break
