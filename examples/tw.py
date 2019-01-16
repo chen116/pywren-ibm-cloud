@@ -78,7 +78,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 print("=========================",self.cnt)
 
 
-            return(True)
+            return(False)
 
         def on_error(self, status):
             print(status.text)
@@ -88,7 +88,6 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
     print('start tw stream')
     twitterStream = Stream(auth, listener())
     twitterStream.filter(track=["car"])
-    setTimeout(() => twitterStream.stop(), 5000)
 
     exitFlag=1
     for t in threads:
