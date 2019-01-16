@@ -103,8 +103,8 @@ access_token_secret = f.readline().strip()
 
 
 class MyStreamListener(tweepy.StreamListener):
-    # def __init__(self):
-    #     self.cnt=0
+    def __init__(self):
+        self.cnt=0
 
     def on_status(self, status):
         print(status.text)
@@ -113,8 +113,8 @@ class MyStreamListener(tweepy.StreamListener):
     #     print(data)
     #     return(True)
 
-    # def on_error(self, status):
-    #     print(status.text)
+    def on_error(self, status):
+        print(status.text)
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
