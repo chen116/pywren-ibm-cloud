@@ -118,7 +118,7 @@ class myStreamListener(tweepy.StreamListener):
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-
+api = tweepy.API(auth)
 twitterStream = tweepy.Stream(auth = api.auth, listener=myStreamListener())
 twitterStream.filter(track=["car"])
 
