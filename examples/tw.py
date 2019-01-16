@@ -76,9 +76,11 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 self.batch=[]
                 self.time=time.time()
                 print("=========================",self.cnt)
+            if self.cnt>=4:
+                exitFlag=0
+                return(False)
 
-
-            return(False)
+            return(True)
 
         def on_error(self, status):
             print(status.text)
