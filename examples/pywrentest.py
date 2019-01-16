@@ -22,29 +22,33 @@ PORT = 65432  # The port used by the server
 # my_source = my_source(socket,window=5)
 
 
-def my_source(pw,my_func,connector='socket',host='localhost',port='65432',window=5):
+def streamprocess(pw,my_func,connector='socket',host='localhost',port='65432',window=2):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
+        s.connect((host, port))
         fcntl.fcntl(s, fcntl.F_SETFL, os.O_NONBLOCK)
-        # s.sendall(b"Hello, world")
         now = time.time()
+        batch=[]
         while True:
             try:
                 data = s.recv(4)
-            except socket.error, e:
+            except socket.error as e:
                 err = e.args[0]
                 if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
-                    print('No data available')
                     continue
                 else:
                     print(e)
                     sys.exit(1)
             else:
+                batch+=[data]
                 if data:
-                    print("Received", repr(data))
+                    print("Received:", repr(data))
                 else:
                     print('meow')
-                break
+                    break
+                if time.time()-now > 2:
+                    print('batch',batch)
+                    batch=[]
+                    now=time.time()
         s.close()
         print('closed')
 
@@ -55,7 +59,7 @@ def my_source(pw,my_func,connector='socket',host='localhost',port='65432',window
 def my_func(x):
 	return sum(x)
 pw = pywren.ibm_cf_executor()
-streamprocess(pw,my_func,connector='socket',host='127.0.0.1',port='65432',window=5)
+streamprocess(pw,my_func,connector='socket',host='127.0.0.1',port='65432',window=2)
 
 
 

@@ -17,15 +17,15 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         except socket.error as e:
             err = e.args[0]
             if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
-                # print('No data available')
                 continue
             else:
                 print(e)
                 sys.exit(1)
         else:
-            batch+=[data]
+            
             if data:
                 print("Received:", repr(data))
+                batch+=[int(data.decode())]
             else:
                 print('meow')
                 break
