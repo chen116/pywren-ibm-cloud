@@ -102,7 +102,7 @@ access_token_secret = f.readline().strip()
 
 import json
 
-d = json.loads(j)
+
 
 class listener(tweepy.StreamListener):
     def __init__(self):
