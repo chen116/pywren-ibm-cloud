@@ -78,7 +78,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 print("=========================",self.cnt)
             if self.cnt>5:
                 exitFlag=1 
-                self.on_error(420)
+                # self.on_error(420)
                 print(len(pw.get_result()))
                 sys.exit('Limit tweets reached.')
 
@@ -86,9 +86,9 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
 
 
         def on_error(self, status):
-            print ("Error " + str(status))
+            # print ("Error " + str(status))
             if status == 420:
-                print("Rate Limited")
+                print("Stop Streaming")
                 return True
 
     auth = OAuthHandler(consumer_key, consumer_secret)
