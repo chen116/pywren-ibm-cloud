@@ -21,3 +21,13 @@ class MyStreamListener(tweepy.StreamListener):
 
     def on_status(self, status):
         print(status.text)
+    def on_data(self, data):
+        print(data)
+        return(True)
+    def on_error(self, status):
+        print status
+
+myStreamListener = MyStreamListener()
+myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener())
+myStream.filter(track=['python'])
+
