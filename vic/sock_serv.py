@@ -17,6 +17,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             #     break
         for i in range(15):
             conn.sendall(str(i).encode())
-            time.sleep(1)
+            time.sleep(0.5)
     print('closing')
     s.close()
