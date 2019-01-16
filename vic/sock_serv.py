@@ -15,7 +15,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # data = conn.recv(1024)
             # if not data:
             #     break
-        for i in range(100):
+        for i in range(15):
             conn.sendall(str(i).encode())
             time.sleep(0.5)
     print('closing')
