@@ -18,7 +18,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
             self.name = name
             self.q = q
         def run(self):
-            print "Starting " + self.name
+            print("Starting " + self.name)
             while not exitFlag:
                 queueLock.acquire()
                 if not workQueue.empty():
@@ -28,7 +28,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
                         pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=False)
                 else:
                     queueLock.release()
-            print "Exiting " + self.name
+            print("Exiting " + self.name)
     queueLock = threading.Lock()
     workQueue = Queue.Queue()
     threadList = ["Thread-1", "Thread-2", "Thread-3"]
