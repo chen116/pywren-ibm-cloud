@@ -48,7 +48,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
         batch=[]
         while True:
             try:
-                data = s.recv(4)
+                data = s.recv(25)
             except socket.error as e:
                 err = e.args[0]
                 if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
