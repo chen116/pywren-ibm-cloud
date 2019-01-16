@@ -102,7 +102,7 @@ access_token_secret = f.readline().strip()
 
 
 
-class myStreamListener(tweepy.StreamListener):
+class MyStreamListener(tweepy.StreamListener):
     # def __init__(self):
     #     self.cnt=0
 
