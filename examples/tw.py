@@ -32,9 +32,6 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             while not exitFlag:
                 queueLock.acquire()
                 if not workQueue.empty():
-                    cnt+=1
-                    if cnt>=100: exitFlag=1
-
                     data = self.q.get()
                     queueLock.release()
                     if data:
@@ -75,7 +72,8 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 queueLock.release()
                 self.batch=[]
                 self.time=time.time()
-
+                if cnt>=100:
+                    exitFlag=1
 
 
             return(True)
