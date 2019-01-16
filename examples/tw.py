@@ -1,7 +1,7 @@
 from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
-
+import tweepy
 f = open("/root/twkeys.txt", "r")
 consumer_key = f.readline().strip()
 consumer_secret = f.readline().strip()
@@ -44,40 +44,42 @@ access_token_secret = f.readline().strip()
 #         threads.append(thread)
 #         threadID += 1
 
+#     for t in threads:
+#         t.join()
+#     print(pw.get_result())
 
 
-
-# class listener(StreamListener):
-#     def __init__(self):
-#         self.cnt=0
-#         self.batch=[]
-#         self.time=0
-
-
-#     def on_data(self, data):
-#         # if self.batch==[]:
-#         #     self.time=time.time()
-#         self.batch+=[data.text]
-#         self.cnt+=1
-#         if time.time()-self.time > 2:
-#             queueLock.acquire()
-#             workQueue.put(batch)
-#             queueLock.release()
+#     class listener(StreamListener):
+#         def __init__(self):
+#             self.cnt=0
 #             self.batch=[]
-#             self.time=time.time()
+#             self.time=0
+
+
+#         def on_data(self, data):
+#             # if self.batch==[]:
+#             #     self.time=time.time()
+#             self.batch+=[data]
+#             self.cnt+=1
+#             if time.time()-self.time > 2:
+#                 queueLock.acquire()
+#                 workQueue.put(batch)
+#                 queueLock.release()
+#                 self.batch=[]
+#                 self.time=time.time()
 
 
 
-#         return(True)
+#             return(True)
 
-#     def on_error(self, status):
-#         print(status.text)
+#         def on_error(self, status):
+#             print(status.text)
 
-# auth = OAuthHandler(consumer_key, consumer_secret)
-# auth.set_access_token(access_token, access_token_secret)
+#     auth = OAuthHandler(consumer_key, consumer_secret)
+#     auth.set_access_token(access_token, access_token_secret)
 
-# twitterStream = Stream(auth, listener())
-# twitterStream.filter(track=["car"])
+#     twitterStream = Stream(auth, listener())
+#     twitterStream.filter(track=["car"])
 
 
 # def my_func(x):
@@ -95,18 +97,21 @@ access_token_secret = f.readline().strip()
 # streamprocess_threads(pw,my_func,my_reduce_function,twitterStream,host='127.0.0.1',port=65432,window=2)
 
 
-def hi(c):
-    print(c)
 
-class listener(StreamListener):
+####################just tweepy stream#######3
+
+
+
+class myStreamListener(tweepy.StreamListener):
     def __init__(self):
         self.cnt=0
 
-
-    def on_data(self, data):
-        self.cnt+=1
-        print(self.cnt)
-        return(True)
+    def on_status(self, status):
+        print(status.text)
+    # def on_data(self, data):
+    #     self.cnt+=1
+    #     print(data)
+    #     return(True)
 
     def on_error(self, status):
         print(status.text)
@@ -114,34 +119,8 @@ class listener(StreamListener):
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
-twitterStream = Stream(auth, listener())
-hi(twitterStream)
-
+twitterStream = tweepy.Stream(auth = api.auth, listener=myStreamListener())
 twitterStream.filter(track=["car"])
-
-
-####################just tweepy stream#######3
-
-
-
-# class listener(StreamListener):
-#     def __init__(self):
-#         self.cnt=0
-
-
-#     def on_data(self, data):
-#         self.cnt+=1
-#         print(data.text)
-#         return(True)
-
-#     def on_error(self, status):
-#         print(status.text)
-
-# auth = OAuthHandler(consumer_key, consumer_secret)
-# auth.set_access_token(access_token, access_token_secret)
-
-# twitterStream = Stream(auth, listener())
-# twitterStream.filter(track=["car"])
 
 
 # import tweepy
