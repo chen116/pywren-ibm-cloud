@@ -11,7 +11,7 @@ access_token_secret = f.readline().strip()
 
 import time,json
 import pywren_ibm_cloud as pywren
-import socket,fcntl,os,errno
+import socket,fcntl,os,errno,sys
 import time
 import queue
 import threading
@@ -77,13 +77,15 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 self.time=time.time()
                 print("=========================",self.cnt)
             if self.cnt>=4:
-                exitFlag=0
-                return(False)
+                sys.exit('Limit of '+str(self.max_tweets)+' tweets reached.')
 
             return(True)
 
         def on_error(self, status):
-            print(status.text)
+            print ("Error " + str(status))
+            if status == 420:
+                print("Rate Limited")
+                return False
 
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
