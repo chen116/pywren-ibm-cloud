@@ -40,7 +40,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                         pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=False)
                 else:
                     queueLock.release()
-                if self.cnt>2:
+                if self.cnt>=2:
                     break
 
             print("Exiting " + self.name)
