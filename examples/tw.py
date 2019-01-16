@@ -90,6 +90,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
     twitterStream.filter(track=["car"])
     time.sleep(10)
     twitterStream.stop()
+    exitFlag=1
     for t in threads:
         t.join()
     print(pw.get_result())
