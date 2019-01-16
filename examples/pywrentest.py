@@ -39,18 +39,20 @@ def streamprocess(pw,my_func,connector='socket',host='localhost',port='65432',wi
                     print(e)
                     sys.exit(1)
             else:
-                batch+=[data]
                 if data:
+                    batch+=[int(data.decode())]
                     print("Received:", repr(data))
                 else:
                     print('meow')
                     break
                 if time.time()-now > 2:
                     print('batch',batch)
+                    pw.map(my_func,batch)
                     batch=[]
                     now=time.time()
         s.close()
         print('closed')
+    pw.get_result()
 
 
 
@@ -67,11 +69,11 @@ streamprocess(pw,my_func,connector='socket',host='127.0.0.1',port='65432',window
 
 ######################################################################
 
-def my_function(x):
-    return x + 7
+# def my_function(x):
+#     return x + 7
 
-if __name__ == '__main__':
-    pw = pywren.ibm_cf_executor()
-    print(pw.executor.invoker.client.is_cf_cluster)
-    pw.call_async(my_function, 3)
-    print (pw.get_result())
+# if __name__ == '__main__':
+#     pw = pywren.ibm_cf_executor()
+#     print(pw.executor.invoker.client.is_cf_cluster)
+#     pw.call_async(my_function, 3)
+#     print (pw.get_result())
