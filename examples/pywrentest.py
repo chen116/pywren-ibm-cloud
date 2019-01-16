@@ -22,7 +22,7 @@ PORT = 65432  # The port used by the server
 # my_source = my_source(socket,window=5)
 
 
-def streamprocess(pw,my_func,connector='socket',host='localhost',port=65432,window=2):
+def streamprocess(pw,my_func,my_reduce_function,connector='socket',host='localhost',port=65432,window=2):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))
         fcntl.fcntl(s, fcntl.F_SETFL, os.O_NONBLOCK)
@@ -47,7 +47,7 @@ def streamprocess(pw,my_func,connector='socket',host='localhost',port=65432,wind
                     break
                 if time.time()-now > 2:
                     print('batch',batch)
-                    pw.map(my_func,batch)
+                    pw.map_reduce(my_func,batch,my_reduce_function)
                     batch=[]
                     now=time.time()
         s.close()
@@ -59,9 +59,14 @@ def streamprocess(pw,my_func,connector='socket',host='localhost',port=65432,wind
 
 
 def my_func(x):
-	return sum(x)
+	return x+10
+def my_reduce_function(results):
+    total = 0
+    for map_result in results:
+        total = total + map_result
+    return total
 pw = pywren.ibm_cf_executor()
-streamprocess(pw,my_func,connector='socket',host='127.0.0.1',port=65432,window=2)
+streamprocess(pw,my_func,my_reduce_function,connector='socket',host='127.0.0.1',port=65432,window=2)
 
 
 
