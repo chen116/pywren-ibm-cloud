@@ -12,5 +12,12 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 public_tweets = api.home_timeline()
-for tweet in public_tweets:
-    print(tweet.text)
+print(len(public_tweets))
+# for tweet in public_tweets:
+#     print(tweet.text)
+
+
+class MyStreamListener(tweepy.StreamListener):
+
+    def on_status(self, status):
+        print(status.text)
