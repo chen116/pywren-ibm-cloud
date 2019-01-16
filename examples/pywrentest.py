@@ -47,12 +47,12 @@ def streamprocess(pw,my_func,my_reduce_function,connector='socket',host='localho
                     break
                 if time.time()-now > 2:
                     print('batch',batch)
-                    pw.map_reduce(my_func,batch,my_reduce_function)
+                    pw.map_reduce(my_func,batch,my_reduce_function,reducer_wait_local=False)
                     batch=[]
                     now=time.time()
         s.close()
         print('closed')
-    pw.get_result()
+    print(pw.get_result())
 
 
 
