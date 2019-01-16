@@ -103,8 +103,8 @@ access_token_secret = f.readline().strip()
 
 
 class myStreamListener(tweepy.StreamListener):
-    def __init__(self):
-        self.cnt=0
+    # def __init__(self):
+    #     self.cnt=0
 
     def on_status(self, status):
         print(status.text)
