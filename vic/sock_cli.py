@@ -29,7 +29,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             else:
                 print('meow')
                 break
-            if time.time()-now > 2:
+            if time.time()-now > 4:
                 print('batch',batch)
                 batch=[]
                 now=time.time()
