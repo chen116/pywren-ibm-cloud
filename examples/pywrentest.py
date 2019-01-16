@@ -98,7 +98,7 @@ def streamprocess(pw,my_func,my_reduce_function,connector='socket',host='localho
                     sys.exit(1)
             else:
                 if data:
-                    batch+=[int(data.decode())]
+                    batch+=[(data.decode())]
                     print("Received:", repr(data))
                 else:
                     print('meow')
