@@ -46,7 +46,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             print("Exiting " + self.name)
     queueLock = threading.Lock()
     workQueue = queue.Queue()
-    threadList = ["Thread-1", "Thread-2", "Thread-3"]
+    threadList = ["Thread-1", "Thread-2"]
     threads = []
     threadID = 1
     for tName in threadList:
@@ -76,7 +76,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 self.batch=[]
                 self.time=time.time()
                 print("=========================",self.cnt)
-            if self.cnt>=4:
+            if self.cnt>=3:
                 exitFlag=1 
                 sys.exit('Limit tweets reached.')
 
