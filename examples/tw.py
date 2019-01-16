@@ -25,7 +25,7 @@ class MyStreamListener(tweepy.StreamListener):
         print(data)
         return(True)
     def on_error(self, status):
-        print status
+        print(status)
 
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener())
