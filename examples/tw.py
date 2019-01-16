@@ -82,7 +82,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
 
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-
+    print('start tw stream')
     twitterStream = Stream(auth, listener())
     twitterStream.filter(track=["car"])
 
