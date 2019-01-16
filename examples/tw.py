@@ -49,9 +49,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
         threads.append(thread)
         threadID += 1
 
-    for t in threads:
-        t.join()
-    print(pw.get_result())
+
 
 
     class listener(StreamListener):
@@ -86,7 +84,10 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
     twitterStream = Stream(auth, listener())
     twitterStream.filter(track=["car"])
 
-
+    for t in threads:
+        t.join()
+    print(pw.get_result())
+    
 def my_func(x):
     return x.split()
 def my_reduce_function(results):
