@@ -30,7 +30,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
                     queueLock.release()
             print("Exiting " + self.name)
     queueLock = threading.Lock()
-    workQueue = Queue.Queue()
+    workQueue = queue.Queue()
     threadList = ["Thread-1", "Thread-2", "Thread-3"]
     threads = []
     threadID = 1
