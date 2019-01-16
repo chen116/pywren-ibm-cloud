@@ -27,17 +27,21 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             self.threadID = threadID
             self.name = name
             self.q = q
+            self.cnt = 0
         def run(self):
             print("Starting " + self.name)
             while exitFlag:
                 queueLock.acquire()
                 if not workQueue.empty():
+                    self.cnt+=1
                     data = self.q.get()
                     queueLock.release()
                     if data:
                         pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=False)
                 else:
                     queueLock.release()
+                if self.cnt>2:
+                    break
 
             print("Exiting " + self.name)
     queueLock = threading.Lock()
