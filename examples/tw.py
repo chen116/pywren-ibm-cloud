@@ -79,8 +79,11 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             if self.cnt>5:
                 exitFlag=1 
                 # self.on_error(420)
-                print(pw.get_result())
-                sys.exit('Limit number of batches reached:')
+
+                for i,e in enumerate(pw.get_result()):
+                    print("Batch #",i+1)
+                    print(e)
+                sys.exit('Limit number of batches reached')
 
 
 
