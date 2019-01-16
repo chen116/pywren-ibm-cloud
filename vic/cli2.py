@@ -10,13 +10,12 @@ message = b'This is the message.  It will be repeated.'
 try:
 
     # Send data
-    print("sending",message)
-    sent = sock.sendto(message, server_address)
+    while True:
+        # Receive response
+        data, server = sock.recvfrom(4097)
+        if data:
+            print('received',data)
 
-    # Receive response
-    print('waiting to receive')
-    data, server = sock.recvfrom(4096)
-    print('received',data)
 
 finally:
     print('closing socket')

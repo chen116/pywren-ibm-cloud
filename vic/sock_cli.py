@@ -1,17 +1,18 @@
+
 import socket
 
-HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 65432        # The port used by the server
+HOST = "127.0.0.1"  # The server's hostname or IP address
+PORT = 65432  # The port used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-	# i=input()
-	i='1'
-	s.connect((HOST, PORT))
-	while i!='q':
-		# s.sendall(i.encode())
-		data = s.recv(1024)
-		if data:
-			print('Received', s.recv(1024))
-		else:
-			break
-		# i=input()
+    s.connect((HOST, PORT))
+    # s.sendall(b"Hello, world")
+    while True:
+        data = s.recv(4)
+        if data:
+            print("Received", repr(data))
+        else:
+            print('meow')
+            break
+    s.close()
+    print('closed')
