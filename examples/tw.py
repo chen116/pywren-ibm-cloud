@@ -1,5 +1,5 @@
 import tweepy
-f = open("~/twkeys.txt", "r")
+f = open("/root/twkeys.txt", "r")
 consumer_key = f.readline()
 consumer_secret = f.readline()
 access_token = f.readline()
