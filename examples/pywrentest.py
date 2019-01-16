@@ -81,7 +81,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
         t.join()
     print('threads done')
     for i,e in enumerate(pw.get_result()):
-        print("Batch #",i+1)
+        print("Batch #",i+1,":")
         print(e)
         print("")
     # print(pw.get_result())
