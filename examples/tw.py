@@ -100,7 +100,9 @@ access_token_secret = f.readline().strip()
 
 ####################just tweepy stream#######3
 
+import json
 
+d = json.loads(j)
 
 class listener(tweepy.StreamListener):
     def __init__(self):
@@ -109,7 +111,8 @@ class listener(tweepy.StreamListener):
 
     def on_data(self, data):
         self.cnt+=1
-        print(data)
+        data=json.loads(data)
+        print(data.text)
         return(True)
 
     def on_error(self, status):
