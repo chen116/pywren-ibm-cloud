@@ -11,8 +11,13 @@ access_token = f.readline().strip()
 access_token_secret = f.readline().strip()
 
 class listener(StreamListener):
+    def __init__(self):
+        self.cnt=0
+
+
     def on_data(self, data):
         self.cnt+=1
+        print(self.cnt)
         return(True)
 
     def on_error(self, status):
