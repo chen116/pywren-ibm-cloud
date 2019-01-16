@@ -22,7 +22,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
             while not exitFlag:
                 queueLock.acquire()
                 if not workQueue.empty():
-                    data = q.get()
+                    data = self.q.get()
                     queueLock.release()
                     if data:
                         pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=False)
