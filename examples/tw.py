@@ -33,7 +33,8 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 queueLock.acquire()
                 if not workQueue.empty():
                     cnt+=1
-                    if cnt>=100
+                    if cnt>=100: exitFlag=1
+
                     data = self.q.get()
                     queueLock.release()
                     if data:
