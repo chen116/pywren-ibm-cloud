@@ -94,7 +94,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
     print('start tw stream')
     twitterStream = Stream(auth, listener())
     twitterStream.filter(track=["car"])
-
+    print('meow')
     exitFlag=1
     for t in threads:
         t.join()
