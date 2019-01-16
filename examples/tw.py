@@ -112,7 +112,7 @@ class listener(tweepy.StreamListener):
     def on_data(self, data):
         self.cnt+=1
         data=json.loads(data)
-        print(data)
+        print(data['text'])
         return(True)
 
     def on_error(self, status):
