@@ -80,7 +80,10 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
     for t in threads:
         t.join()
     print('threads done')
-    print(pw.get_result())
+    for i,e in enumerate(pw.get_result()):
+        print("Batch #",i+1)
+        print(e)
+    # print(pw.get_result())
 
 
 #================== no thread ================
