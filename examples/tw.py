@@ -32,7 +32,7 @@ class listener(StreamListener):
         return(True)
 
     def on_error(self, status):
-        print status
+        print(status)
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
