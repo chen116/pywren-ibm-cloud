@@ -19,7 +19,7 @@ import threading
 
 
 def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhost',port=65432,window=2):
-    exitFlag = 0
+    exitFlag = 1
     cnt=0
     class myThread (threading.Thread):
         def __init__(self, threadID, name, q):
@@ -29,7 +29,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             self.q = q
         def run(self):
             print("Starting " + self.name)
-            while not exitFlag:
+            while exitFlag:
                 queueLock.acquire()
                 if not workQueue.empty():
                     data = self.q.get()
@@ -60,7 +60,6 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             self.batch=[]
             self.time=0
 
-
         def on_data(self, data):
             # if self.batch==[]:
             #     self.time=time.time()
@@ -72,9 +71,9 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 queueLock.release()
                 self.batch=[]
                 self.time=time.time()
-                if self.cnt>=10:
-                    exitFlag=1
-                print("=========================",self.cnt)
+                # if self.cnt>=10:
+                    # self.exitFlag=1
+                print("=========================",self.cnt,exitFlag)
 
 
             return(True)
