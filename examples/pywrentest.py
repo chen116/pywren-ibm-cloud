@@ -58,7 +58,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
                     sys.exit(1)
             else:
                 if data:
-                    batch+=[int(data.decode())]
+                    batch+=[data.decode()]
                     print("Received:", repr(data))
                 else:
                     print('meow')
