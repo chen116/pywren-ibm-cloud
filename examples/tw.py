@@ -17,17 +17,25 @@ print(len(public_tweets))
 #     print(tweet.text)
 
 
-class MyStreamListener(tweepy.StreamListener):
+from tweepy import Stream
+from tweepy import OAuthHandler
+from tweepy.streaming import StreamListener
 
-    def on_status(self, status):
-        print(status.text)
+
+#consumer key, consumer secret, access token, access secret.
+
+
+class listener(StreamListener):
+
     def on_data(self, data):
         print(data)
         return(True)
+
     def on_error(self, status):
-        print(status)
+        print status
 
-myStreamListener = MyStreamListener()
-myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener())
-myStream.filter(track=['python'])
+auth = OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
 
+twitterStream = Stream(auth, listener())
+twitterStream.filter(track=["car"])
