@@ -74,6 +74,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 self.time=time.time()
                 if cnt>=10:
                     exitFlag=1
+                print("=========================",cnt)
 
 
             return(True)
