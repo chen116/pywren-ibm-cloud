@@ -20,6 +20,7 @@ import threading
 
 def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhost',port=65432,window=2):
     exitFlag = 0
+    cnt=0
     class myThread (threading.Thread):
         def __init__(self, threadID, name, q):
             threading.Thread.__init__(self)
@@ -31,12 +32,15 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             while not exitFlag:
                 queueLock.acquire()
                 if not workQueue.empty():
+                    cnt+=1
+                    if cnt>=100
                     data = self.q.get()
                     queueLock.release()
                     if data:
                         pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=False)
                 else:
                     queueLock.release()
+
             print("Exiting " + self.name)
     queueLock = threading.Lock()
     workQueue = queue.Queue()
@@ -87,7 +91,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
     for t in threads:
         t.join()
     print(pw.get_result())
-    
+
 def my_func(x):
     return x.split()
 def my_reduce_function(results):
