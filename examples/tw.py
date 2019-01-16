@@ -111,7 +111,7 @@ def my_reduce_function(results):
             if i in ma:
                 ma[i]+=1
             else:
-                ma[i]=0    
+                ma[i]=1    
     return ma
 pw = pywren.ibm_cf_executor()
 streamprocess_threads(pw,my_func,my_reduce_function,"twitterStream",host='127.0.0.1',port=65432,window=2)
