@@ -79,7 +79,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             if self.cnt>=5:
                 exitFlag=1 
                 self.on_error(420)
-                print(pw.get_result())
+                print(len(pw.get_result()))
                 sys.exit('Limit tweets reached.')
 
 
