@@ -88,7 +88,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             print ("Error " + str(status))
             if status == 420:
                 print("Rate Limited")
-                return False
+                return True
 
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
