@@ -26,10 +26,11 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
                     data = self.q.get()
                     queueLock.release()
                     if data:
-                        self.pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=False)
+                        self.pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=True)
                 else:
                     queueLock.release()
             print("Exiting " + self.name)
+            self.pw.wait()
             self.pw.get_result()
 
     queueLock = threading.Lock()
