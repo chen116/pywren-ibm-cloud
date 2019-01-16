@@ -102,27 +102,24 @@ access_token_secret = f.readline().strip()
 
 
 
-class MyStreamListener(tweepy.StreamListener):
+class listener(tweepy.StreamListener):
     def __init__(self):
         self.cnt=0
 
-    def on_status(self, status):
-        print(status.text)
-    # def on_data(self, data):
-    #     self.cnt+=1
-    #     print(data)
-    #     return(True)
+
+    def on_data(self, data):
+        self.cnt+=1
+        print(data)
+        return(True)
 
     def on_error(self, status):
         print(status.text)
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-api = tweepy.API(auth)
 
-myStreamListener = MyStreamListener()
-myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
-myStream.filter(track=["car"])
+twitterStream = Stream(auth, listener())
+twitterStream.filter(track=["car"])
 
 
 # import tweepy
