@@ -105,7 +105,7 @@ class listener(StreamListener):
 
     def on_data(self, data):
         self.cnt+=1
-        print(cnt)
+        print(self.cnt)
         return(True)
 
     def on_error(self, status):
