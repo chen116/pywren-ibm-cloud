@@ -118,9 +118,16 @@ def streamprocess(pw,my_func,my_reduce_function,connector='socket',host='localho
 
 
 def my_func(x):
-	return x+10
+	return x.split()
 def my_reduce_function(results):
-    return sum(results)
+    ma={}
+    for x in results:
+        for i in x:
+            if i in ma:
+                ma[i]+=1
+            else:
+                ma[i]=0    
+    return ma
 pw = pywren.ibm_cf_executor()
 streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host='127.0.0.1',port=65432,window=2)
 
