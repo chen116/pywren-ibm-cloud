@@ -22,7 +22,7 @@ PORT = 65432  # The port used by the server
 # my_source = my_source(socket,window=5)
 
 
-def streamprocess(pw,my_func,connector='socket',host='localhost',port='65432',window=2):
+def streamprocess(pw,my_func,connector='socket',host='localhost',port=65432,window=2):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))
         fcntl.fcntl(s, fcntl.F_SETFL, os.O_NONBLOCK)
@@ -61,7 +61,7 @@ def streamprocess(pw,my_func,connector='socket',host='localhost',port='65432',wi
 def my_func(x):
 	return sum(x)
 pw = pywren.ibm_cf_executor()
-streamprocess(pw,my_func,connector='socket',host='127.0.0.1',port='65432',window=2)
+streamprocess(pw,my_func,connector='socket',host='127.0.0.1',port=65432,window=2)
 
 
 
