@@ -4,7 +4,7 @@ Simple PyWren example using one single function invocation
 import pywren_ibm_cloud as pywren
 import socket,fcntl,os,errno
 import time
-import Queue
+import queue
 import threading
 
 
