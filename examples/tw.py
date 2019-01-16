@@ -70,17 +70,18 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             self.batch+=[json.loads(data)['text']]
             if time.time()-self.time > 2:
                 self.cnt+=1
+                if self.cnt>=5:
+                    exitFlag=1 
+                    self.on_error(420)
+                    print(pw.get_result())
+                sys.exit('Limit tweets reached.')
                 queueLock.acquire()
                 workQueue.put(self.batch)
                 queueLock.release()
                 self.batch=[]
                 self.time=time.time()
                 print("=========================",self.cnt)
-            if self.cnt>=5:
-                exitFlag=1 
-                self.on_error(420)
-                print(pw.get_result())
-                sys.exit('Limit tweets reached.')
+
 
 
 
