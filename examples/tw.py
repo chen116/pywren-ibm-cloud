@@ -65,8 +65,8 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
             # if self.batch==[]:
             #     self.time=time.time()
             self.batch+=[json.loads(data)['text']]
-            self.cnt+=1
             if time.time()-self.time > 2:
+                self.cnt+=1
                 queueLock.acquire()
                 workQueue.put(self.batch)
                 queueLock.release()
