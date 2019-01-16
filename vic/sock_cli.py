@@ -1,5 +1,5 @@
 
-import socket,fcntl,os
+import socket,fcntl,os,errno
 import time
 
 HOST = "127.0.0.1"  # The server's hostname or IP address
