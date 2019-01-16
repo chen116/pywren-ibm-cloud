@@ -28,7 +28,7 @@ from tweepy.streaming import StreamListener
 class listener(StreamListener):
     self.cnt=0
     def on_data(self, data):
-        cnt+=1
+        self.cnt+=1
         print(cnt)
         return(True)
 
