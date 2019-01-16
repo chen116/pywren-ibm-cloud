@@ -17,7 +17,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
             self.threadID = threadID
             self.name = name
             self.q = q
-            self.pw=pw
+            self.pw=pywren.ibm_cf_executor()
         def run(self):
             print("Starting " + self.name)
             while not exitFlag:
@@ -79,7 +79,8 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host=
         print('closed')
     for t in threads:
         t.join()
-    print(pw.get_result())
+    print('threads done')
+    # print(pw.get_result())
 
 
 #================== no thread ================
@@ -132,7 +133,7 @@ def my_reduce_function(results):
             else:
                 ma[i]=0    
     return ma
-pw = pywren.ibm_cf_executor()
+pw = 1#pywren.ibm_cf_executor()
 streamprocess_threads(pw,my_func,my_reduce_function,connector='socket',host='127.0.0.1',port=65432,window=2)
 
 
