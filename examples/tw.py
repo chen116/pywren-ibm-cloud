@@ -71,9 +71,7 @@ def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhos
                 queueLock.release()
                 self.batch=[]
                 self.time=time.time()
-                if self.cnt>=2:
-                    exitFlag=0
-                print("=========================",self.cnt,exitFlag)
+                print("=========================",self.cnt)
 
 
             return(True)
