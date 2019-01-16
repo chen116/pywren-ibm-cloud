@@ -9,120 +9,120 @@ access_token = f.readline().strip()
 access_token_secret = f.readline().strip()
 
 
-# import time
+import time,json
 
 
 
-# def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhost',port=65432,window=2):
-#     exitFlag = 0
-#     class myThread (threading.Thread):
-#         def __init__(self, threadID, name, q):
-#             threading.Thread.__init__(self)
-#             self.threadID = threadID
-#             self.name = name
-#             self.q = q
-#         def run(self):
-#             print("Starting " + self.name)
-#             while not exitFlag:
-#                 queueLock.acquire()
-#                 if not workQueue.empty():
-#                     data = self.q.get()
-#                     queueLock.release()
-#                     if data:
-#                         pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=False)
-#                 else:
-#                     queueLock.release()
-#             print("Exiting " + self.name)
-#     queueLock = threading.Lock()
-#     workQueue = queue.Queue()
-#     threadList = ["Thread-1", "Thread-2", "Thread-3"]
-#     threads = []
-#     threadID = 1
-#     for tName in threadList:
-#         thread = myThread(threadID, tName, workQueue)
-#         thread.start()
-#         threads.append(thread)
-#         threadID += 1
+def streamprocess_threads(pw,my_func,my_reduce_function,connector,host='localhost',port=65432,window=2):
+    exitFlag = 0
+    class myThread (threading.Thread):
+        def __init__(self, threadID, name, q):
+            threading.Thread.__init__(self)
+            self.threadID = threadID
+            self.name = name
+            self.q = q
+        def run(self):
+            print("Starting " + self.name)
+            while not exitFlag:
+                queueLock.acquire()
+                if not workQueue.empty():
+                    data = self.q.get()
+                    queueLock.release()
+                    if data:
+                        pw.map_reduce(my_func,data,my_reduce_function,reducer_wait_local=False)
+                else:
+                    queueLock.release()
+            print("Exiting " + self.name)
+    queueLock = threading.Lock()
+    workQueue = queue.Queue()
+    threadList = ["Thread-1", "Thread-2", "Thread-3"]
+    threads = []
+    threadID = 1
+    for tName in threadList:
+        thread = myThread(threadID, tName, workQueue)
+        thread.start()
+        threads.append(thread)
+        threadID += 1
 
-#     for t in threads:
-#         t.join()
-#     print(pw.get_result())
-
-
-#     class listener(StreamListener):
-#         def __init__(self):
-#             self.cnt=0
-#             self.batch=[]
-#             self.time=0
+    for t in threads:
+        t.join()
+    print(pw.get_result())
 
 
-#         def on_data(self, data):
-#             # if self.batch==[]:
-#             #     self.time=time.time()
-#             self.batch+=[data]
-#             self.cnt+=1
-#             if time.time()-self.time > 2:
-#                 queueLock.acquire()
-#                 workQueue.put(batch)
-#                 queueLock.release()
-#                 self.batch=[]
-#                 self.time=time.time()
+    class listener(StreamListener):
+        def __init__(self):
+            self.cnt=0
+            self.batch=[]
+            self.time=0
+
+
+        def on_data(self, data):
+            # if self.batch==[]:
+            #     self.time=time.time()
+            self.batch+=[json.loads(data)['text']]
+            self.cnt+=1
+            if time.time()-self.time > 2:
+                queueLock.acquire()
+                workQueue.put(self.batch)
+                queueLock.release()
+                self.batch=[]
+                self.time=time.time()
 
 
 
-#             return(True)
+            return(True)
 
-#         def on_error(self, status):
-#             print(status.text)
+        def on_error(self, status):
+            print(status.text)
 
-#     auth = OAuthHandler(consumer_key, consumer_secret)
-#     auth.set_access_token(access_token, access_token_secret)
+    auth = OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
 
-#     twitterStream = Stream(auth, listener())
-#     twitterStream.filter(track=["car"])
+    twitterStream = Stream(auth, listener())
+    twitterStream.filter(track=["car"])
 
 
-# def my_func(x):
-#     return x.split()
-# def my_reduce_function(results):
-#     ma={}
-#     for x in results:
-#         for i in x:
-#             if i in ma:
-#                 ma[i]+=1
-#             else:
-#                 ma[i]=0    
-#     return ma
-# pw = pywren.ibm_cf_executor()
-# streamprocess_threads(pw,my_func,my_reduce_function,twitterStream,host='127.0.0.1',port=65432,window=2)
+def my_func(x):
+    return x.split()
+def my_reduce_function(results):
+    ma={}
+    for x in results:
+        for i in x:
+            if i in ma:
+                ma[i]+=1
+            else:
+                ma[i]=0    
+    return ma
+pw = pywren.ibm_cf_executor()
+streamprocess_threads(pw,my_func,my_reduce_function,twitterStream,host='127.0.0.1',port=65432,window=2)
 
 
 
 ####################just tweepy stream#######3
 
-import json
+# import json
 
 
 
-class listener(tweepy.StreamListener):
-    def __init__(self):
-        self.cnt=0
+# class listener(tweepy.StreamListener):
+#     def __init__(self):
+#         self.cnt=0
 
 
-    def on_data(self, data):
-        self.cnt+=1
-        data=json.loads(data)
-        print(data['text'])
-        return(True)
+#     def on_data(self, data):
+#         self.cnt+=1
+#         data=json.loads(data)
+#         print(data['text'])
+#         return(True)
 
-    def on_error(self, status):
-        print(status.text)
+#     def on_error(self, status):
+#         print(status.text)
 
-auth = OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+# auth = OAuthHandler(consumer_key, consumer_secret)
+# auth.set_access_token(access_token, access_token_secret)
 
-twitterStream = Stream(auth, listener())
-twitterStream.filter(track=["car"],async=True)
+# twitterStream = Stream(auth, listener())
+# twitterStream.filter(track=["car"])
 
 
 # import tweepy
