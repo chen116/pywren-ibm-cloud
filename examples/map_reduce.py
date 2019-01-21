@@ -25,7 +25,7 @@ def my_reduce_function(results):
 By default the reducer will be launched within a Cloud Function
 when the local PyWren have all the results from the mappers.
 """
-pw = pywren.ibm_cf_executor(logging=DEBUG)
+pw = pywren.ibm_cf_executor(logging='DEBUG')
 pw.map_reduce(my_map_function, iterdata, my_reduce_function)
 print(pw.get_result())
 
