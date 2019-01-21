@@ -24,8 +24,8 @@ import logging
 
 # This script installs PyWren-IBM-Cloud from https://github.com/pywren/pywren-ibm-cloud
 # get_ipython().system('curl -fsSL "https://git.io/fhe9X" | sh')
-try:
-    import pywren_ibm_cloud as pywren
+# try:
+import pywren_ibm_cloud as pywren
 # except:
 #     get_ipython().system('curl -fsSL "https://git.io/fhe9X" | sh')
 #     import pywren_ibm_cloud as pywren
