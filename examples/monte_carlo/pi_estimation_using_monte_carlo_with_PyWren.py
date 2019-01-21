@@ -23,12 +23,12 @@ from random import random
 import logging
 
 # This script installs PyWren-IBM-Cloud from https://github.com/pywren/pywren-ibm-cloud
-get_ipython().system('curl -fsSL "https://git.io/fhe9X" | sh')
-try:
-    import pywren_ibm_cloud as pywren
-except:
-    get_ipython().system('curl -fsSL "https://git.io/fhe9X" | sh')
-    import pywren_ibm_cloud as pywren
+# get_ipython().system('curl -fsSL "https://git.io/fhe9X" | sh')
+# try:
+#     import pywren_ibm_cloud as pywren
+# except:
+#     get_ipython().system('curl -fsSL "https://git.io/fhe9X" | sh')
+#     import pywren_ibm_cloud as pywren
 
 # you can modify logging level if needed
 logging.basicConfig(level=logging.INFO)
@@ -106,8 +106,8 @@ config = {'ibm_cf':  {'endpoint': '<IBM Cloud Functions Endpoint>',
 # In[ ]:
 
 
-from pywren_ibm_cloud.deployutil import clone_runtime
-clone_runtime('ibmfunctions/pywren:3.5', config, 'pywren-ibm-cloud')
+# from pywren_ibm_cloud.deployutil import clone_runtime
+# clone_runtime('ibmfunctions/pywren:3.5', config, 'pywren-ibm-cloud')
 
 
 # # Step 5 - Execute simulation with PyWren over IBM Cloud Functions 
@@ -121,7 +121,8 @@ est_pi = EstimatePI()
 start_time = time()
 print("Monte Carlo simulation for estimating PI spawing over {} IBM Cloud Function invocations".format(MAP_INSTANCES))
 # obtain PyWren-IBM-Cloud executor
-pw = pywren.ibm_cf_executor(config=config, runtime='pywren_3.5')
+# pw = pywren.ibm_cf_executor(config=config, runtime='pywren_3.5')
+pw = pywren.ibm_cf_executor()
 # execute the code
 pw.map_reduce(est_pi.randomize_points, iterdata, est_pi.process_in_circle_points, reducer_wait_local=False, remote_invocation=True)
 #get results
