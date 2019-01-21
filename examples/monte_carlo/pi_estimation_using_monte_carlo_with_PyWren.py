@@ -31,7 +31,7 @@ import pywren_ibm_cloud as pywren
 #     import pywren_ibm_cloud as pywren
 
 # you can modify logging level if needed
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 # # Step 2 - Write Python code that implements Monte Carlo simulation 
